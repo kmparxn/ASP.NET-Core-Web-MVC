@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using SportKcenter.Data;
+using SportKcenter.Helpers;
 using SportKcenter.Interfaces;
 using SportKcenter.Repository;
+using SportKcenter.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IClubRepository, ClubRepository>();
 builder.Services.AddScoped<IRaceRepository, RaceRepository>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
